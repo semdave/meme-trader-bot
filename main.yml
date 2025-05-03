@@ -1,0 +1,15 @@
+name: Run Tracker Bot
+on: [push, schedule]
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+      - run: python src/bot.py
+        env:
+          FLIPSIDE_API_KEY: ${{ secrets.FLipside_KEY }}
